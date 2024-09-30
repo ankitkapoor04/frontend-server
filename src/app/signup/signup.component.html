@@ -1,0 +1,63 @@
+<div class="signup-container">
+  <div class="left-section">
+    <div class="logo-container">
+      <img src="assets/img/playzlogo.svg" alt="PlayZLogo" class="logo">
+    </div>
+    <div class="text-container">
+      <h2>{{signupStrings.signintoText}}</h2>
+      <h6>{{signupStrings.playzText}}</h6>
+      <p>{{signupStrings.descriptionText}}</p>
+    </div>
+  </div>
+  <div class="middle-section">
+    <img src="assets/img/homePageLogo.svg" alt="RocketImage" class="rocket-image">
+  </div>
+  <div class="right-section">
+    <div class="header">
+      <h4>{{signupStrings.welcometoText}} <strong>{{signupStrings.playzText}} </strong></h4>
+      <a href="/signin" class="signin-link">{{signupStrings.haveanAccountText}}<br>
+        <span>{{signupStrings.signinText}}</span></a>
+    </div>
+    <div class="signup-heading">
+      <h6>{{signupStrings.signUpText}}</h6>
+    </div>
+    <form (ngSubmit)="onSubmit(signupForm)" #signupForm="ngForm">
+      <label for="username">{{signupStrings.UsernameText}}</label>
+      <input type="text" id="username" name="username" [(ngModel)]="userData.username" required minlength="3" required maxlength="30"
+        #username="ngModel" class="form-input" placeholder="Username">
+      <div *ngIf="username.invalid && (username.dirty || username.touched || isSubmitted)" class="form-error">
+        <div *ngIf="username.errors?.['required']">{{signupStrings.usernameRequired}}</div>
+        <div *ngIf="username.errors?.['minlength']">{{signupStrings.invalidUsername}}</div>
+      </div>
+
+      <label for="email">{{signupStrings.emailText}}</label>
+      <input type="email" id="email" name="email" [(ngModel)]="userData.email" required email #email="ngModel"
+        class="form-input" placeholder="Email address">
+      <div *ngIf="email.invalid && (email.dirty || email.touched || isSubmitted)" class="form-error">
+        <div *ngIf="email.errors?.['required']">{{signupStrings.emailRequired}}</div>
+        <div *ngIf="email.errors?.['email']">{{signupStrings.invalidEmailText}}</div>
+      </div>
+
+      <label for="contact">{{signupStrings.ContactText}}</label>
+      <input type="number" id="contactNumber" name="contactNumber" [(ngModel)]="userData.contactNumber" required
+        pattern="^[0-9]{10}$" inputmode="numeric" #contactNumber="ngModel" class="form-input"
+        placeholder="Contact Number" (ngModelChange)="validateNoLeadingSpace(contactNumber)">
+      <div *ngIf="contactNumber.invalid && (contactNumber.dirty || contactNumber.touched || isSubmitted)"
+        class="form-error">
+        <div *ngIf="contactNumber.errors?.['required']">{{signupStrings.contactNumberRequired}}</div>
+        <div *ngIf="contactNumber.errors?.['pattern']">{{signupStrings.contactNumberPattern}}</div>
+      </div>
+
+      <label for="password">{{signupStrings.passwordText}}</label>
+      <input type="password" id="password" name="password" [(ngModel)]="userData.password" required minlength="8"
+        #password="ngModel" class="form-input" placeholder="Password"
+        (ngModelChange)="validateNoLeadingSpace(password)">
+      <div *ngIf="password.invalid && (password.dirty || password.touched || isSubmitted)" class="form-error">
+        <div *ngIf="password.errors?.['required']">{{signupStrings.passwordRequired}}</div>
+        <div *ngIf="password.errors?.['minlength']">{{signupStrings.invalidPassword}}</div>
+      </div>
+
+      <button type="submit">{{signupStrings.signUpText}}</button>
+    </form>
+  </div>
+</div>

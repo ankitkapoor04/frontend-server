@@ -1,0 +1,65 @@
+/* Navbar Styles */
+.navbar {
+  background-color: #FFFFFF;
+  padding: 5px; 
+  display: flex;
+  justify-content: flex-end; 
+  align-items: center;
+
+}
+
+.nav-content {
+  display: flex;
+  align-items: center;
+  margin-left: auto; 
+  margin-right: 0.6rem;
+  font-size: 16px;
+}
+
+.logout {
+  color: #132A52;
+  font-weight: 600;
+  margin-right: 0.5rem;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.avatar {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 38.5px;
+  margin-left: 2.5rem;
+}
+
+/* Media Queries */
+@media (min-width: 640px) {
+  .navbar {
+    padding: 1.25rem; 
+  }
+
+  .logout {
+    margin-right: 1rem;
+  }
+
+  .avatar {
+    width: 4rem; 
+    height: 4rem;
+  }
+}
+
+@media (max-width: 639px) {
+  .navbar {
+    justify-content: center; 
+    padding: auto;
+  }
+
+  .logout {
+    margin-right: -1.5rem; 
+    margin-bottom: 0.5rem; 
+  }
+
+  .avatar {
+    width: 2.5rem; 
+    height: 2.5rem;
+  }
+}

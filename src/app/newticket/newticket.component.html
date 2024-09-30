@@ -1,0 +1,95 @@
+<!-- Newticket component starts -->
+<div [ngClass]="{'blur-bg': isModalOpen}" class="content-wrapper">
+  <div class="de" >
+    <div><h2 class="title">{{strings.title}}</h2><p class="subtitle">{{strings.subtitle}}</p></div>
+    <div class="end" *ngIf="hasTickets"><input class= "search-input" maxlength="100" type="text" [(ngModel)]="searchTerm"  (ngModelChange)="onSearchChange($event)"(keydown.enter)="onEnterPress()"   placeholder="Search by name, password, or pin..." />
+      <img src="assets/img/refresh-icon.svg" class="refresh-icon" (click)="onRefresh()" alt="Refresh"></div>
+    <div><button (click)="openModal()" class="button">
+      <img src="assets/img/plus-icon.svg" alt="Plus-icon" class="icon">
+      {{strings.newTicketButton}}
+    </button></div>
+  </div>
+</div>
+
+<!-- Popup Form -->
+<div *ngIf="isModalOpen" class="modal-overlay">
+  <div class="modal-content">
+    <div class="modal-body">
+      <h2 class="modal-title">{{strings.modalTitle}}</h2>
+      <p class="modal-subtitle">{{strings.modalSubtitle}}</p>
+
+      <form (ngSubmit)="onSubmit(ticketForm)" #ticketForm="ngForm" class="form-container">
+        <!-- Name Field -->
+        <div class="form-group">
+          <label for="name" class="form-label">{{strings.nameLabel}}</label>
+          <input type="text" id="name" name="name" ngModel required #name="ngModel" class="form-input"
+            [placeholder]="strings.namePlaceholder" pattern="^[^\s].*" minlength="3" maxlength="255"
+            (input)="validateNoLeadingSpace(name)">
+          <div *ngIf="name.invalid && (name.dirty || name.touched)" class="form-error">
+            <div *ngIf="name.errors?.['required']">{{strings.nameRequired}}</div>
+            <div *ngIf="name.errors?.['minlength']">{{strings.nameMinLength}}</div>
+            <div *ngIf="name.errors?.['maxlength']">{{strings.nameMaxLength}}</div>
+          </div>
+        </div>
+
+        <!-- Contact Number Field -->
+        <div class="form-group">
+          <label for="contactNumber" class="form-label">{{strings.contactNumberLabel}}</label>
+          <input type="text" id="contactNumber" name="contactNumber" ngModel required #contactNumber="ngModel"
+            pattern="[0-9]{10}" class="form-input" [placeholder]="strings.contactNumberPlaceholder">
+          <div *ngIf="contactNumber.invalid && (contactNumber.dirty || contactNumber.touched)" class="form-error">
+            <div *ngIf="contactNumber.errors?.['required']">{{strings.contactNumberRequired}}</div>
+            <div *ngIf="contactNumber.errors?.['pattern']">{{strings.contactNumberPattern}}</div>
+          </div>
+        </div>
+
+        <!-- Membership Category Field -->
+        <div class="form-group">
+          <label for="membershipCategory" class="form-label">{{strings.membershipCategoryLabel}}</label>
+          <div class="category-buttons">
+            <button type="button"
+              [ngClass]="{'active': selectedCategory === strings.guestCategory, 'inactive': selectedCategory !== strings.guestCategory}"
+              (click)="selectCategory(strings.guestCategory)" class="category-button">
+              {{strings.guestCategory}}
+            </button>
+            <button type="button"
+              [ngClass]="{'active': selectedCategory === strings.yearlyCategory, 'inactive': selectedCategory !== strings.yearlyCategory}"
+              (click)="selectCategory(strings.yearlyCategory)" class="category-button">
+              {{strings.yearlyCategory}}
+            </button>
+            <button type="button"
+              [ngClass]="{'active': selectedCategory === strings.monthlyCategory, 'inactive': selectedCategory !== strings.monthlyCategory}"
+              (click)="selectCategory(strings.monthlyCategory)" class="category-button">
+              {{strings.monthlyCategory}}
+            </button>
+          </div>
+        </div>
+
+        <!-- Info Message (for Guest selection) -->
+        <div class="info-message" *ngIf="selectedCategory">
+          <p>
+            <span [innerHTML]="getMessageForCategory(selectedCategory)"></span>
+          </p>
+        </div>
+
+        <!-- Amount Field -->
+        <div class="form-group">
+          <label for="amount" class="form-label">{{strings.amountLabel}}</label>
+          <input type="text" id="amount" name="amount" ngModel required #amount="ngModel" class="form-input"
+            [placeholder]="strings.amountPlaceholder" pattern="[0-9]*">
+          <div *ngIf="amount.invalid && (amount.dirty || amount.touched)" class="form-error">
+            <div *ngIf="amount.errors?.['required']">{{strings.amountRequired}}</div>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+          <button type="button" class="cancel-button" (click)="closeModal()">{{strings.cancelButton}}</button>
+          <button type="submit" class="submit-button">{{strings.submitButton}}</button>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+</div>

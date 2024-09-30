@@ -1,0 +1,26 @@
+{
+    "descriptionText": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+    "haveanAccountText": "Have an Account?",
+    "signinText":"Sign in",
+    "emailText": "Enter your Email Address",
+    "passwordText":"Enter your Password",
+    "signintoText":"Sign in to",
+    "playzText":"Play Z",
+    "signUpText":"Sign Up",
+    "UsernameText": "Enter your Username",
+    "ContactText": "Enter your Contact Number",
+    "welcometoText":"Welcome to",
+    "signupText":"Sign Up",
+    "contactNumberRequired": "Contact number is required.",
+    "contactNumberPattern": "Contact number must be exactly 10 digits & it should be numbers only.",
+    "emailRequired": "Email is required.",
+    "invalidEmailText": "Invalid email address",
+    "usernameRequired": " Username is required",
+    "invalidUsername": "Username must be atleast 3 characters and maximum 30 characters",
+    "passwordRequired": "Password is required",
+    "invalidPassword": "Password must be atleast 8 characters ",
+    "successText": "Success",
+    "registrationfailedText": "Registration failed",
+    "errorText": "Error"
+
+}

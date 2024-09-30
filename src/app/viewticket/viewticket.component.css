@@ -1,0 +1,748 @@
+@font-face {
+  font-family: inter_font;
+  src: url("../../assets/fonts/inter_font.ttf");
+}
+
+
+/* Ticket Container */
+.ticket-container {
+  max-width: 100%;
+  margin: 0 auto;
+  font-family: inter_font;
+  padding: 1rem;
+
+}
+
+.no-tickets-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+  font-weight: bold;
+  color: #aad7e9;
+  font-size: 1.5em;
+  text-align: center;
+}
+
+/* Ticket Table */
+.ticket-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 2rem;
+
+}
+
+.ticket-table th,
+.ticket-table td {
+  width: auto;
+  height: 40px;
+  padding: 3px 15px;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+  color: #232323;
+  font-family: inter_font;
+}
+
+.ticket-table th {
+  background-color: #506676;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 21.78px;
+  text-align: left;
+  padding: 12px 12px;
+
+}
+
+.ticket-table th:first-child {
+  border-top-left-radius: 10px;
+}
+
+.ticket-table th:last-child {
+  border-top-right-radius: 10px;
+}
+
+.ticket-table tr:nth-child(even) {
+  background-color: #F4F4F4;
+}
+
+.ticket-table tr:nth-child(odd) {
+  background-color: #FFFFFF;
+}
+
+/* Dropdown */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropbtn {
+  background-color: transparent;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.dropdown-content {
+  top: 0; /* Align to the top of the button */
+  left: -350%; /* Position to the left of the button */
+  display: none;
+  position: absolute;
+  background-color: #ffffff;
+  min-width: 120px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.dropdown-content button {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  text-align: left;
+  background: none;
+  border: none;
+  width: 100%;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-family: inter_font;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 14.52px;
+  text-align: left;
+  color: #232323;
+
+}
+
+.dropdown-content button:hover {
+  background-color: #f0f0f0;
+}
+
+.dropdown-content button img {
+  width: 16px;
+  height: 16px;
+  margin-right: 10px;
+  /* Add margin here for spacing */
+  flex-shrink: 0;
+}
+
+
+.dropdown-content button:hover {
+  background-color: #f1f1f1;
+}
+
+/* Show dropdown when the 'show' class is added */
+.dropdown .show {
+  display: block;
+}
+
+/* Styles for the delete modal overlay */
+.delete-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #23232399;
+  /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  /* Ensure it is on top of other elements */
+  border: 1px solid #DBE0E5
+}
+
+/* Styles for the delete modal content */
+.delete-modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
+  border: 1px solid #DBE0E5;
+  padding: 2.2rem;
+}
+
+/* Styles for the delete modal body */
+.delete-modal-body {
+  text-align: center;
+}
+
+
+
+/* Styles for the delete action buttons */
+.delete-action-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+
+.delete-cancel-button,
+.delete-submit-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.delete-cancel-button {
+  background-color: #ccc;
+  font-family: inter_font;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 19.36px;
+  text-align: left;
+  color: #232323;
+  background: #FFFFFF;
+
+}
+
+.delete-submit-button {
+  background-color: #D41818;
+  color: #fff;
+  font-family: inter_font;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 19.36px;
+  text-align: left;
+
+
+}
+
+.delete-cancel-button:hover {
+  background-color: #f3f4f6;
+}
+
+.centered-button {
+    display: inline-flex; /* Use inline-flex for better control with button */
+    justify-content: center;
+    align-items: center;
+    width: 40px; /* Adjust width as needed */
+    height: 40px; /* Adjust height as needed */
+    padding: 0;
+    margin: 0 5px; /* Adjust margin for spacing between buttons if needed */
+    border: none;
+    background-color: transparent; /* Adjust background as per your design */
+    cursor: not-allowed; /* Reflects the disabled state */
+}
+
+.dots-icon {
+    width: 12px; /* Adjust the icon size if needed */
+    height: 12px; /* Keeps the icon proportionate */
+    display: block; /* Ensures the image doesn't affect layout */
+}
+
+
+.pagination {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  margin-top: 20px;
+  flex-wrap: wrap;
+  font-family: inter_font;
+  position: absolute;
+  bottom: 5px;
+  right: 20px;
+  width: 100%;
+}
+
+.pagination button {
+  border: none;
+  background-color: transparent;
+  color: #333;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 14px;
+  margin: 0 5px;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+  width: 47.41px;
+  height: 47.41px;
+}
+
+.pagination button:disabled {
+  cursor: not-allowed;
+  color: #ccc;
+}
+
+.pagination button.active {
+  background-color: #193345;
+  color: #ffffff;
+}
+
+.pagination button:not(.active) {
+  background-color: #EFEFEF;
+  border: 2px solid #ffffff;
+}
+
+/* Popup Form */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #23232399;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+  z-index: 1000;
+
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 550px;
+  height: calc(100vh - 40px);
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.modal-body {
+  flex-grow: 1;
+}
+
+.modal-title {
+  font-family: Poppins;
+  font-size: 35px;
+  font-weight: 500;
+  line-height: 45px;
+  text-align: left;
+  color: #000000;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-label {
+  display: block;
+  font-family: Poppins;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: left;
+  color: #000000;
+}
+
+.form-input {
+  margin-top: 0.25rem;
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  background-color: #f9f9f9;
+}
+
+.form-error {
+  color: #dc2626;
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+  font-family: Poppins;
+}
+
+.category-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+  font-family: Poppins;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: left;
+  color: #000000;
+}
+
+.category-button {
+  flex: 1;
+  padding: 0.5rem;
+  border-radius: 0.375rem;
+  border: 1px solid #d1d5db;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s;
+}
+
+.category-button.active {
+  background-color: #193345;
+  color: white;
+}
+
+.category-button.inactive {
+  background-color: white;
+}
+
+
+.action-buttons {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+  position: absolute;
+  bottom: 3rem;
+  right: 3rem;
+  width: auto;
+  padding: 0;
+}
+
+.cancel-button,
+.submit-button {
+  margin: 0;
+}
+
+.cancel-button {
+  padding: 0.5rem 1rem;
+  border: none;
+  background: none;
+  color: black;
+  transition: color 0.3s;
+  cursor: pointer;
+  font-family: Poppins;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: left;
+}
+
+.cancel-button:hover {
+  background-color: #f3f4f6;
+}
+
+.submit-button {
+  background-color: #193345;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-family: Poppins;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: left;
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+
+.submit-button:hover {
+  background-color: #193345;
+}
+
+/* Media query for maximum width 480px (small devices, phones) */
+@media (max-width: 480px) {
+
+  .ticket-container {
+    padding: 0.25rem;
+
+  }
+
+  th,
+  td {
+    padding: 0.25rem;
+  }
+
+  th {
+    font-size: 0.9rem;
+  }
+
+  .ticket-table th,
+  .ticket-table td {
+    font-size: 10px;
+    padding: 2px 4px;
+    line-height: 12px;
+
+  }
+
+  .dropdown-content {
+    min-width: 80px;
+    font-size: 10px;
+  }
+
+  .delete-modal-content {
+    padding: 10px;
+    max-width: 90%;
+    font-size: 12px;
+    /* Updated */
+    line-height: 16px;
+    /* Updated */
+  }
+
+  .delete-modal-body {
+    font-size: 12px;
+    /* Use relative units for font size */
+    line-height: 1.0;
+    /* Ensure good readability */
+    margin: 1rem 0;
+    /* Add some margin for spacing */
+  }
+
+  .delete-action-buttons {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .delete-cancel-button,
+  .delete-submit-button {
+    padding: 8px 12px;
+    font-size: 12px;
+    width: 100%;
+  }
+
+  .modal-title {
+    font-size: 24px;
+    line-height: 30px;
+    margin-top: 2.5rem;
+  }
+
+  .pagination {
+    bottom: 10px;
+    right: 10px;
+    margin-top: 5rem;
+  }
+
+  .pagination button {
+    font-size: 8px;
+    width: 30px;
+    height: 30px;
+  }
+
+  .category-buttons,
+  .form-label {
+    font-size: 12px;
+    line-height: 16px;
+  }
+
+  .form-input {
+    padding: 0.25rem;
+
+    font-size: 12px;
+    /* Updated */
+    line-height: 16px;
+  }
+
+  button {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+  }
+}
+
+/* Media query for maximum width 639px (small tablets) */
+@media (max-width: 639px) {
+  .title {
+    font-size: 18px;
+    line-height: 22px;
+    margin-bottom: 0.3rem;
+  }
+
+  .subtitle {
+    font-size: 12px;
+    line-height: 14px;
+    margin-bottom: 0.15rem;
+  }
+
+  .modal-content {
+    width: 100%;
+    max-width: none;
+    height: auto;
+    margin: 10px;
+    padding-bottom: 2rem;
+  }
+
+  .action-buttons {
+    position: static;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: -1rem;
+  }
+
+  .button {
+    font-size: 0.9rem;
+    margin: 0.15rem 0.15rem;
+    padding: 0.8rem;
+    white-space: normal;
+    flex: 1 1 auto;
+    text-align: center;
+    min-width: 0;
+  }
+
+  .button .icon  {
+    width: 0.6rem;
+    height: 0.6rem;
+    margin-right: 0.5rem;
+    padding: -1rem;
+
+  }
+}
+
+/* Media query for maximum width 768px (medium devices, tablets) */
+@media (max-width: 768px) {
+
+  .ticket-table th,
+  .ticket-table td {
+    font-size: 12px;
+    padding: 6px 8px;
+  }
+
+  .dropdown-content {
+    min-width: 100px;
+  }
+
+  .delete-modal-content {
+    padding: 15px;
+    max-width: 300px;
+  }
+
+  .delete-modal-title {
+    font-size: 1.2em;
+  }
+
+  .delete-action-buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .delete-cancel-button,
+  .delete-submit-button {
+    padding: 8px 15px;
+    font-size: 12px;
+    width: 100%;
+    line-height: 16px;
+  }
+
+  .pagination button {
+    font-size: 10px;
+    width: 30px;
+    height: 30px;
+  }
+}
+
+/* Media query for width between 768px and 1024px (landscape tablets and small desktops) */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .modal-title {
+    font-size: 26px;
+    /* Updated */
+    line-height: 34px;
+    /* Updated */
+    margin-top: 2.0rem;
+    margin-bottom: 3.5rem;
+  }
+
+  .form-group {
+    margin-bottom: 2.5rem;
+  }
+
+
+  .form-group {
+    margin-bottom: 1.0rem;
+  }
+}
+
+/* Media query for width between 640px and 1200px (larger tablets and desktops) */
+@media (max-width: 1200px) {
+
+  .ticket-table th,
+  .ticket-table td {
+    padding: 6px 8px;
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .delete-modal-content {
+    padding: 15px;
+    max-width: 300px;
+    font-size: 12px;
+    /* Updated */
+    line-height: 18px;
+    /* Updated */
+  }
+
+
+
+  .delete-action-buttons {
+    display: flex;
+    flex-direction: row;
+    /* Align items in a row */
+    justify-content: space-between;
+    /* Add space between items */
+    gap: 10px;
+    /* Optional: Add gap between items */
+  }
+
+  .delete-cancel-button,
+  .delete-submit-button {
+    width: auto;
+    font-size: 12px;
+    line-height: 16px;
+    /* Updated */
+    /* Adjust width to fit two buttons in one line */
+  }
+
+  .pagination button {
+    font-size: 10px;
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* Media query for minimum width 640px (large devices) */
+@media (min-width: 640px) {
+  .modal-body {
+    margin-bottom: 50px;
+  }
+
+  .card {
+    padding: 1.5rem;
+  }
+
+  .button {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    line-height: 1.2;
+  }
+}
+
+/* Media query for minimum width 1024px (desktops and larger screens) */
+@media (min-width: 1024px) {
+  .modal-content {
+    max-width: 35rem;
+  }
+
+  .category-button {
+    padding: 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  .button {
+    padding: 0.5rem 1.5rem;
+
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+}
+
+/* Styling for the search bar container */
+.search-container {
+  margin: 15px 0;
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+  background-color: #f8f9fa;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}

@@ -1,0 +1,20 @@
+{
+    "settingsTitle": "Settings",
+    "applicationsHeading": "APPLICATIONS",
+    "addButton": "+ Add",
+    "applicationColumn": "APPLICATION",
+    "apiKeyColumn": "API KEY",
+    "secretKeyColumn": "SECRET KEY",
+    "webhookModalTitle": "WEBHOOK",
+    "webhookAddButton": "+ Add",
+    "urlLabel": "URL",
+    "eventsLabel": "EVENTS",
+    "eventAuthentication": "Authentication",
+    "eventStreamStarting": "Stream starting",
+    "eventStreamStopped": "Stream stopped",
+    "cancelButton": "Cancel",
+    "saveButton": "Save",
+    "addUrl":"ADD url",
+    "url":"url",
+    "events":"Events"
+  }

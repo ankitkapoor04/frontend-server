@@ -1,0 +1,29 @@
+<div class="sidebar">
+  <div class="header">
+    <img src="assets/img/playz-logo.svg" alt="PlayZLogo" class="playz-logo">
+    <div class="profile-card">
+      <div class="profile-info">
+        <div class="icon-container">
+          <img src="assets/img/user-bg.svg" alt="user-avatar" class="background-image">
+          <img src="assets/img/user-avatar.svg" alt="user-avatar" class="overlay-image">
+        </div>
+        <div class="text-info">
+          <h2 class="name">{{ username }}</h2>
+          <p class="role">{{ sidebarData.profileCardRole}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="menu-item" [ngClass]="{'active': isActive('/dashboard'), 'inactive': !isActive('/dashboard')}" routerLink="/dashboard">
+      <div class="menu-icon">
+        <img src="assets/img/menu-icon.svg" alt="menu-icon" class="icon">
+      </div>
+      <span class="menu-text" >{{ sidebarData.menuItemText}}</span>
+    </div>
+  </div>
+  <div class="menu-item"[ngClass]="{'active': isActive('/settings'), 'inactive': !isActive('/settings')}" routerLink="/settings">
+    <div class="setting-icon">
+      <img src="assets/img/setting-icon.svg" alt="setting-icon" class="icon">
+    </div>
+    <span class="settings-text" >{{ sidebarData.menuSettingText}}</span>
+  </div>
+</div>

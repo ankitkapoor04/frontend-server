@@ -1,0 +1,55 @@
+<div class="signin-container">
+    <div class="left-section">
+        <div class="logo-container">
+            <img src="assets/img/playzlogo.svg" alt="PlayZLogo" class="logo">
+        </div>
+        <div class="text-container">
+            <h2>{{loginStrings.signintoText}}</h2>
+            <h6>{{loginStrings.playzText}}</h6>
+            <p>{{loginStrings.description}}</p>
+        </div>
+    </div>
+    <div class="middle-section">
+        <img src="assets/img/centerrocket.svg" alt="RocketImage" class="rocket-image">
+    </div>
+    <div class="right-section">
+        <div class="header">
+            <h4>{{loginStrings.welcometoText}}</h4>
+            <a href="/signup" class="signup-link">{{loginStrings.noaccountText}} <br><span>Sign up</span></a>
+        </div>
+        <div class="signin-heading">
+            <h6>{{loginStrings.signinText}}</h6>
+        </div>
+        <form (ngSubmit)="onLogin(signinForm)" #signinForm="ngForm">
+            <!-- Email Field -->
+            <label for="email">{{loginStrings.enteremailText}}</label>
+            <input type="text" id="emailOrUsername" name="emailOrUsername" ngModel required minlength="3" maxlength="30" #emailOrUsername="ngModel"
+                class="form-input" placeholder="Email address or Username"
+                [(ngModel)]="loginObj.emailOrUsername">
+            <div *ngIf="emailOrUsername.invalid && (emailOrUsername.dirty || emailOrUsername.touched || isSubmitted)"
+                class="form-error">
+                <div *ngIf="emailOrUsername.errors?.['required']">{{loginStrings.emailRequiredText}}</div>
+                <div *ngIf="emailOrUsername.errors?.['minlength']">{{loginStrings.emailOrUsernameMinLengthText}}</div>
+                <div *ngIf="emailOrUsername.errors?.['maxlength']">{{loginStrings.emailOrUsernameMaxLengthText}}</div>
+            </div>
+
+            <label for="password">{{loginStrings.enterpasswordText}}</label>
+            <div class="password-container">
+                <input [type]="passwordFieldType" id="password" name="password" ngModel required minlength="8"
+                    #password="ngModel" class="form-input" placeholder="Password" (keydown)="space($event)"
+                    [(ngModel)]="loginObj.password">
+                <button type="button" (click)="togglePasswordVisibility()" class="toggle-password">
+                    <img [src]="passwordFieldType === 'password' ? 'assets/img/eye.svg' : 'assets/img/open-eye.png'"
+                        alt="Toggle Password Visibility">
+                </button>
+            </div>
+            <div *ngIf="password.invalid && (password.dirty || password.touched || isSubmitted)" class="form-error">
+                <div *ngIf="password.errors?.['required']">{{loginStrings.passwordRequiredText}}</div>
+                <div *ngIf="password.errors?.['minlength']">{{loginStrings.passwordValidationText}}</div>
+            </div>
+
+            <!-- Submit Button -->
+            <button class="submit-button" type="submit">{{loginStrings.signinText}}</button>
+        </form>
+    </div>
+</div>

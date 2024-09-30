@@ -1,0 +1,133 @@
+/* Dashboard container holding the sidebar and main content */
+.dashboard-container {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+/* Fixed header container holding the navbar and new ticket component */
+.fixed-header {
+    position: fixed;
+    top: 0;
+    left: 250px;
+    width: calc(100% - 250px);
+    z-index: 1000;
+    background-color: #fff;
+}
+
+/* Sidebar container on the left */
+.sidebar-container {
+    width: 20%;
+    max-width: 250px;
+    height: 100vh;
+    box-sizing: border-box;
+}
+
+/* Main content area */
+.main-content {
+    flex-grow: 1;
+    height: calc(100vh - 128px); /* Adjust to ensure enough height for content */
+    overflow-y: auto;
+    overflow-x: auto; /* Allow horizontal scrolling */
+    padding-left: 16px;
+    box-sizing: border-box;
+    margin-top: 14rem;
+}
+
+/* Content wrapper adjustments */
+.content-wrapper {
+    padding-top: 16px;
+    margin-top: 0; /* Remove extra margin-top to align with the fixed header */
+    overflow-x: auto; /* Allow horizontal scrolling */
+}
+
+/* Navbar adjustments */
+.navbar {
+    height: 60px;
+}
+
+/* New ticket component adjustments */
+.newticket {
+    height: 64px;
+    margin-bottom: 16px;
+}
+
+/* View ticket component adjustments */
+.viewticket {
+    margin-top: 16px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 892px) {
+    .sidebar-container {
+        width: 25%;
+    }
+
+    .fixed-header {
+        width: calc(100% - 25%);
+        left: 25%;
+    }
+    .content-wrapper {
+      margin-top: 4rem;
+  }
+}
+
+@media (max-width: 768px) {
+    .sidebar-container {
+        width: 30%;
+    }
+
+    .fixed-header {
+        width: calc(100% - 30%);
+        left: 30%;
+    }
+    .content-wrapper {
+        margin-top: 4rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .sidebar-container {
+        width: 40%;
+    }
+
+    .fixed-header {
+        width: calc(100% - 40%);
+        left: 40%;
+    }
+    .content-wrapper {
+      margin-top: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+    .sidebar-container {
+        width: 90%;
+    }
+    .fixed-header {
+        width: calc(100% - 40%);
+        left: 40%;
+    }
+    .main-content {
+        height: calc(100vh - 64px);
+    }
+    .content-wrapper {
+        padding-left: 0;
+        margin-top: 1.8rem;
+    }
+}
+@media (min-width: 580px) and (max-width: 640px) {
+
+  .sidebar-container {
+    width: 30%;
+}
+
+.fixed-header {
+    width: calc(100% - 30%);
+    left: 30%;
+}
+.content-wrapper {
+    margin-top: 1rem;
+}
+}

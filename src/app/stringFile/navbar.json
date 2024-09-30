@@ -1,0 +1,9 @@
+{
+  "logoutText": "Logout",
+  "tokenText": "token",
+  "notokenfoundText": "No token found",
+  "errorText": "Error",
+  "successText": "Success",
+  "logoutfailedText": "Logout failed",
+  "usernameText": "username"
+}

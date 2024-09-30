@@ -1,0 +1,159 @@
+<div class="ticket-container">
+  <ng-container *ngIf="tickets.length > 0; else noTicketsTemplate">
+    <table class="ticket-table">
+      <thead>
+        <tr>
+          <th>{{ strings.ticketIDHeader }}</th>
+          <th>{{ strings.nameHeader }}</th>
+          <th>{{ strings.mobileHeader }}</th>
+          <th>{{ strings.membershipHeader }}</th>
+          <th>{{ strings.creditsHeader }}</th>
+          <th>{{ strings.pinHeader }}</th>
+          <th>{{ strings.actionsHeader }}</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr *ngFor="let ticket of tickets; let i = index; trackBy: trackByTicketID">
+
+          <td>{{ i+1}}</td>
+          <td>{{ ticket.name }}</td>
+          <td>{{ ticket.contactNumber }}</td>
+          <td>{{ ticket.membershipCategory }}</td>
+          <td>{{ ticket.amount }}</td>
+          <td>{{ ticket.pin }}</td>
+          <td class="actions">
+            <div class="dropdown">
+              <button class="dropbtn" (click)="toggleDropdown(ticket.ticketId, $event)">
+                <img src="assets/img/edit-icon.svg" alt="{{ strings.editButtonText }}">
+              </button>
+              <div class="dropdown-content" [ngClass]="{ 'show': activeDropdown === ticket.ticketId }">
+                <button (click)="openEditForm(ticket)">
+                  <img src="assets/img/delete-icon.svg" alt="{{ strings.editButtonText }}">{{ strings.editButtonText }}
+                </button>
+                <button (click)="openDeletePopup(ticket)">
+                  <img src="assets/img/edit-detail-icon.svg" alt="{{ strings.deleteButtonText }}">{{
+                  strings.deleteButtonText }}
+                </button>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </ng-container>
+  <ng-template #noTicketsTemplate>
+    <div class="no-tickets-message">
+     <h1> {{ isSearchActive ? strings.noTicketsFound : strings.noTicketsText
+      }}</h1>
+    </div>
+  </ng-template>
+
+  <!-- Delete Confirmation Popup -->
+  <div class="delete-modal-overlay" *ngIf="isDeletePopupOpen" (click)="closeDeletePopup()">
+    <div class="delete-modal-content" (click)="$event.stopPropagation()">
+      <div class="delete-modal-body">
+        <p>{{ strings.deleteModalMessage }}</p>
+        <div class="delete-action-buttons">
+          <button type="button" class="delete-cancel-button" (click)="closeDeletePopup()">{{
+            strings.deleteModalCancelButtonText }}</button>
+          <button type="button" class="delete-submit-button" (click)="confirmDelete()">{{
+            strings.deleteModalConfirmButtonText }}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Pagination -->
+<div class="parent-container" *ngIf="isActive" >
+  <div class="pagination" *ngIf="!shouldDisablePagination()">
+    <button (click)="prevPage()" [disabled]="currentPage === 1">
+      <img src="assets/img/leftshift-icon.svg" alt="{{ strings.paginationPrevButtonAlt }}">
+    </button>
+    <button (click)="goToPage(1)" [class.active]="currentPage === 1">
+      1
+    </button>
+    <button *ngIf="shouldShowLeftDots()" class="centered-button" disabled>
+      <img src="assets/img/dots-icon.svg" class="dots-icon" alt="{{ strings.paginationNextButtonAlt }}">
+    </button>
+    <button *ngIf="!isFirstOrLastPage()" (click)="goToPage(currentPage)" [class.active]="true">
+      {{ currentPage }}
+    </button>
+    <button *ngIf="shouldShowRightDots()" class="centered-button" disabled>
+      <img src="assets/img/dots-icon.svg" class="dots-icon" alt="{{ strings.paginationNextButtonAlt }}">
+    </button>
+    <button (click)="goToPage(totalPages)" [class.active]="currentPage === totalPages">
+      {{ totalPages }}
+    </button>
+    <button (click)="nextPage()" [disabled]="currentPage === totalPages">
+      <img src="assets/img/rightshift-icon.svg" alt="{{ strings.paginationNextButtonAlt }}">
+    </button>
+  </div>
+</div>
+
+<div class="modal-overlay" *ngIf="isFormOpen" (click)="closeEditForm()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-body">
+      <h2 class="modal-title">{{ strings.editModalTitle }}</h2>
+      <form (ngSubmit)="saveTicket(ticketForm)" #ticketForm="ngForm" class="form-container">
+        <!-- Name Field -->
+        <div class="form-group">
+          <label for="name" class="form-label">{{ strings.editFormNameLabel }}</label>
+          <input type="text" id="name" name="name" [(ngModel)]="selectedTicket.name" class="form-input"
+            placeholder="{{ strings.editFormNamePlaceholder }}" required #name="ngModel">
+          <div *ngIf="name.invalid && (name.dirty || name.touched)" class="form-error">
+            <div *ngIf="name.errors?.['required']">{{ strings.editFormNameRequiredMessage }}</div>
+          </div>
+        </div>
+
+        <!-- Contact Number Field -->
+        <div class="form-group">
+          <label for="contactNumber" class="form-label">{{ strings.editFormContactNumberLabel }}</label>
+          <input type="text" id="contactNumber" name="contactNumber" [(ngModel)]="selectedTicket.contactNumber"
+            class="form-input" placeholder="{{ strings.editFormContactNumberPlaceholder }}" required
+            #contactNumber="ngModel">
+          <div *ngIf="contactNumber.invalid && (contactNumber.dirty || contactNumber.touched)" class="form-error">
+            <div *ngIf="contactNumber.errors?.['required']">{{ strings.editFormContactNumberRequiredMessage }}</div>
+          </div>
+        </div>
+
+        <!-- Membership Category Field -->
+        <div class="form-group">
+          <label for="membershipCategory" class="form-label">{{ strings.editFormMembershipCategoryLabel }}</label>
+          <div class="category-buttons">
+            <button type="button" [class.active]="selectedTicket.membershipCategory === strings.editFormGuestCategory"
+              (click)="selectCategory(strings.editFormGuestCategory)" class="category-button">
+              {{ strings.editFormGuestCategory }}
+            </button>
+            <button type="button" [class.active]="selectedTicket.membershipCategory === strings.editFormYearlyCategory"
+              (click)="selectCategory(strings.editFormYearlyCategory)" class="category-button">
+              {{ strings.editFormYearlyCategory }}
+            </button>
+            <button type="button" [class.active]="selectedTicket.membershipCategory === strings.editFormMonthlyCategory"
+              (click)="selectCategory(strings.editFormMonthlyCategory)" class="category-button">
+              {{ strings.editFormMonthlyCategory }}
+            </button>
+          </div>
+        </div>
+
+        <!-- Amount Field -->
+        <div class="form-group">
+          <label for="amount" class="form-label">{{ strings.editFormAmountLabel }}</label>
+          <input type="number" id="amount" name="amount" [(ngModel)]="selectedTicket.amount" class="form-input"
+            placeholder="{{ strings.editFormAmountPlaceholder }}" required #amount="ngModel">
+          <div *ngIf="amount.invalid && (amount.dirty || amount.touched)" class="form-error">
+            <div *ngIf="amount.errors?.['required']">{{ strings.editFormAmountRequiredMessage }}</div>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+          <button type="button" class="cancel-button" (click)="closeEditForm()">{{ strings.editFormCancelButtonText
+            }}</button>
+          <button type="submit" class="submit-button">{{ strings.editFormSubmitButtonText }}</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

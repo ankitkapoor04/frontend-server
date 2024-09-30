@@ -1,0 +1,123 @@
+<div class="dashboard-container">
+    <div class="fixed-header">
+        <app-navbar class="navbar"></app-navbar>
+    </div>
+    <div class="sidebar-container">
+        <app-sidebar></app-sidebar>
+    </div>
+    <div class="main-content">
+        <div class="content-wrapper">
+            <div class="settings-heading">
+                <h1>{{ settings.settingsTitle }}</h1>
+            </div>
+            <div class="settings-container">
+                <div class="settings-header">
+                    <h4>{{ settings.applicationsHeading }}</h4>
+                    <button class="add-btn" (click)="openPopup()">{{ settings.addButton }}</button>
+                </div>
+                <table class="settings-table">
+                    <thead>
+                        <tr>
+                            <th>{{ settings.applicationColumn }}</th>
+                            <th>{{ settings.apiKeyColumn }}</th>
+                            <th>{{ settings.secretKeyColumn }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let app of applications">
+                            <td>{{ app.name }}</td>
+                            <td>
+                                <div class="key-container">
+                                    <img src="assets/img/copy-icon.svg" alt="API Key Icon" />
+                                    <span>{{ app.apiKey }}</span>
+                                    <button class="refresh-btn">
+                                        <img src="assets/img/refresh-icon.svg" alt="Refresh" />
+                                    </button>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="key-container secret-key-container">
+                                    <img src="assets/img/copy-icon.svg" alt="Secret Key Icon" />
+                                    <span>{{ app.secretKey }}</span>
+                                    <button class="refresh-btn">
+                                        <img src="assets/img/refresh-icon.svg" alt="Refresh" />
+                                    </button>
+                                    <button class="url-btn">{{ settings.urlLabel }}</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="popup-modal" *ngIf="isPopupOpen">
+                <div class="popup-content">
+                    <div class="popup-header">
+                        <h4>{{ settings.webhookModalTitle }}</h4>
+                        <button class="add-button" (click)="openAddUrlPopup()">{{ settings.addButton }}</button>
+                    </div>
+                    <div class="popup-body">
+                        <div class="webhook-column">
+                            <h5>{{ settings.urlLabel }}</h5>
+                            <div class="webhook-item" *ngFor="let url of webhooks">
+                                <div class="webhook-url-container">
+                                    <span>{{ url }}</span>
+                                </div>
+                                <button class="weburl-btn"><img src="assets/img/view-icon.svg" alt="Refresh" />
+                                </button>
+                            </div>
+                        </div>
+                          <div class="events-column">
+                            <h5>{{ settings.eventsLabel }}</h5>
+                            <label>
+                                <input type="checkbox" [(ngModel)]="events.auth" />
+                                {{ settings.eventAuthentication }}
+                            </label>
+                            <label>
+                                <input type="checkbox" [(ngModel)]="events.streamStarting" />
+                                {{ settings.eventStreamStarting }} 
+                            </label>
+                            <label>
+                                <input type="checkbox" [(ngModel)]="events.streamStopped" />
+                                {{ settings.eventStreamStopped }}
+                            </label>
+                        </div>
+                    </div>
+                    <div class="popup-footer">
+                        <button class="cancel-btn" (click)="closePopup()">{{ settings.cancelButton }}</button>
+                        <button class="save-btn">{{ settings.saveButton }}</button>
+                    </div>
+                </div>
+            <div class="add-url-container" *ngIf="isAddUrlPopupOpen">
+                <h3>{{settings.addUrl}}</h3>
+                <form>
+                  <div class="form-field">
+                    <label for="url">{{settings.url}}</label>
+                    <input type="text" id="url" name="url" placeholder="Enter URL" required>
+                  </div>    
+                  <div class="form-field">
+                    <label>{{settings.events}}</label>
+                    <div class="checkbox-group">
+                      <div>
+                        <input type="checkbox" id="authentication">
+                        <label for="authentication">{{settings.eventAuthentication}}</label>
+                      </div>
+                      <div>
+                        <input type="checkbox" id="streamStarting">
+                        <label for="streamStarting">{{settings.eventStreamStarting}}</label>
+                      </div>
+                      <div>
+                        <input type="checkbox" id="streamStopped">
+                        <label for="streamStopped">{{settings.eventStreamStopped}}</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-actions">
+                    <button type="button" (click)="  closeAddUrlPopup()">{{settings.cancelButton}}</button>
+                    <button type="submit">{{settings.saveButton}}</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
