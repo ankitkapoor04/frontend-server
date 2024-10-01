@@ -1,6 +1,6 @@
 {
-  "profileCardName": "John Smith",  
-  "profileCardRole": "Super Admin",  
+  "profileCardName": "John Smith",
+  "profileCardRole": "Super Admin",
   "menuItemText": "Ticket list" ,
-  "menuSettingText": "Settings" 
+  "menuSettingText": "Settings"
 }
