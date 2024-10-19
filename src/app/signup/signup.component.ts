@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { signupService } from './signup.component.service';
-import * as signupStrings from '../stringfile/signup.json';
+import signupStrings from '../stringfile/signup.json';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
@@ -35,7 +35,7 @@ export class SignupComponent {
       this.router.navigate([routeConstants.dashboard]);
     }
   }
-  
+
   validateNoLeadingSpace(control: any) {
     if (control.value) {
       const trimmedValue = control.value.trim();
